@@ -3,3 +3,4 @@ numpy
 seaborn
 Flask
 scikit-learn
+gunicorn
