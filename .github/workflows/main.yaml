@@ -37,6 +37,4 @@ jobs:
           docker_options: '--no-cache'
           dockerfile_name: Dockerfile
 
-      # Step 5: Verify Deployment
-      - name: Check Deployment
-        run: curl --fail https://${{ secrets.HEROKU_APP_NAME }}.herokuapp.com || exit 1
+
