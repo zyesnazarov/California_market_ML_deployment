@@ -10,41 +10,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Check out the code
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Log in to Heroku
-        run: 
-          echo ${{ secrets.HEROKU_API_KEY }} 
-
+      # Step 2: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
 
+      # Step 3: Install dependencies
       - name: Install dependencies
-        run: 
+        run: |
           pip install -r requirements.txt
 
-      
+      # Step 4: Deploy to Heroku using Docker
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.13.15
         with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }} 
-          heroku_app_name: ${{ secrets.heroku_app_name }}       
-          heroku_email: ${{ secrets.heroku_email }}       
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
           process_type: web
-          dockerfile_directory: ./
+          dockerfile_directory: ./  # Adjust if your Dockerfile is in a subdirectory
           docker_options: '--no-cache'
           dockerfile_name: Dockerfile
 
-      - name: Build and Push Docker Image
-        run: |
-          docker build -t registry.heroku.com/california-house-pricing/web .
-          docker push registry.heroku.com/california-house-pricing/web
-
-          
+      # Step 5: Verify Deployment
       - name: Check Deployment
-        run: curl --fail https://california-house-pricing.herokuapp.com || exit 1
-
-      
+        run: curl --fail https://${{ secrets.HEROKU_APP_NAME }}.herokuapp.com || exit 1
