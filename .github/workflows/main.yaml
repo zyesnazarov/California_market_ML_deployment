@@ -33,3 +33,20 @@ jobs:
           dockerfile_directory: ./
           docker_options: '--no-cache'
           dockerfile_name: Dockerfile
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t registry.heroku.com/california-house-pricing/web .
+          docker push registry.heroku.com/california-house-pricing/web
+
+      - name: Release Heroku Image
+        run: |
+          heroku container:release web --app california-house-pricing
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
+     
+      - name: Check Deployment
+        run: curl --fail https://california-house-pricing.herokuapp.com || exit 1
+
+      
