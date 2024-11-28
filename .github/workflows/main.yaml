@@ -3,38 +3,24 @@ name: Deploy to Heroku
 on:
   push:
     branches:
-      - main  # Trigger workflow on push to the 'main' branch
+      - main  
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the code
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js (optional, if you need to build the project before deploying)
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x' # Specify your Node.js version
-          cache: 'npm'
-
-      # Step 3: Install dependencies (if needed for build or testing)
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Build the project (if needed)
-      - name: Build the project
-        run: npm run build
-        env:
-          NODE_ENV: production
-
-      # Step 5: Deploy to Heroku
+      
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.13.15
         with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }} # Your Heroku API key stored in GitHub Secrets
-          heroku_app_name: "california-house-pricing"       # Replace with your Heroku app name
-          heroku_email: "zyesnazarov@gmail.com"       # Your Heroku account email
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }} 
+          heroku_app_name: ${{ secrets.heroku_app_name }}       
+          heroku_email: ${{ secrets.heroku_email }}       
+          process_type: web
+          dockerfile_directory: ./
+          docker_options: '--no-cache'
+          dockerfile_name: Dockerfile
