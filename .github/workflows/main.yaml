@@ -33,8 +33,8 @@ jobs:
 
       # Step 5: Deploy to Heroku
       - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v4.0.0
+        uses: akhileshns/heroku-deploy@v3.13.15
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }} # Your Heroku API key stored in GitHub Secrets
-          heroku_app_name: "your-heroku-app-name"       # Replace with your Heroku app name
-          heroku_email: "your-email@example.com"       # Your Heroku account email
+          heroku_app_name: "california-house-pricing"       # Replace with your Heroku app name
+          heroku_email: "zyesnazarov@gmail.com"       # Your Heroku account email
