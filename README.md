@@ -50,8 +50,3 @@ To demonstrate the practical applicability of the predictive model, the project 
 - **Continuous Deployment**: Set up continuous integration and deployment pipelines to streamline updates and maintenance of the application.
 
 You can access the deployed application [here](https://california-house-pricing-1ca4e6b4baf7.herokuapp.com/).
-
-### Why California Housing?
-
-California is known for its diverse real estate market, influenced by factors such as economic conditions, geographic location, population density, and infrastructure development. By focusing on the California Housing Dataset, this project provides a practical example of how machine learning can be applied to real estate data to inform decision-making, investment strategies, and urban planning.
-
